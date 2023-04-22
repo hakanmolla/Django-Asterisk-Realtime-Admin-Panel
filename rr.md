@@ -32,6 +32,7 @@ pip install virtualenv
 ```
 
 ## Adım 4: Sanal Ortam Oluşturma
+
 Sanal ortam oluşturmak için projenizin ana dizininde bir klasör oluşturun. Bu klasör, sanal ortamınızın kök dizini olacaktır. Ardından, aşağıdaki komutu girerek sanal ortamı oluşturabilirsiniz:
 
 Windows:
@@ -53,17 +54,13 @@ Sanal ortamı etkinleştirmek için aşağıdaki komutları kullanabilirsiniz:
 
 Windows:
 ```bash
-
 project-name\Scripts\activate
-
 ```
-
 Unix veya Linux:
 ```bash
 source myenv/bin/activate
 
 ```
-
 
 ## Adım 6: Django Kurulumu
 Sanal ortamınız etkinleştirildiğinde, projenizin kök dizininde bulunan pip paket yöneticisini kullanarak Django paketini yükleyebilirsiniz:
@@ -72,33 +69,43 @@ Sanal ortamınız etkinleştirildiğinde, projenizin kök dizininde bulunan pip 
 pip install django
 
 ```
-
 ## Adım 7: Colorama Eklentisi (isteğe bağlı)
-Colorama, Python dilinde terminal üzerinde renkli yazılar yazmak için kullanılan bir pakettir.
 
+Colorama, Python dilinde terminal üzerinde renkli yazılar yazmak için kullanılan bir pakettir.
+```bash
 py -m pip install colorama
 
+```
+
 ## Adım 8: Django Projesi Oluşturma
+
 Django paketini başarıyla yükledikten sonra, sanal ortamınızda bir Django projesi oluşturabilirsiniz. Aşağıdaki komutu kullanarak Django projesi oluşturabilirsiniz:
 
 ```bash
 django-admin startproject myproject
 
 ```
-<span style="color:red">Not!: Benim tavsiyem **config** olarak oluşturmanız ve sonuna . koymanız olacaktır. </span>
+Burada myproject, oluşturmak istediğiniz Django projesinin adıdır. İsterseniz başka bir isim de seçebilirsiniz.
+
+<span style="color:red">**Not!: Benim tavsiyem **config** olarak oluşturmanız ve sonuna . koymanız olacaktır.** </span>
 
 ```bash
 django-admin startproject config .
 
 ```
-<font color="red">Not:</font>
-Burada myproject, oluşturmak istediğiniz Django projesinin adıdır. İsterseniz başka bir isim de seçebilirsiniz.
-
 ## Adım 9: Django Projeyi Çalıştırma
-Django projesini çalıştırmak için projenizin
+Django Porjeniz oluştu şimdi bundan sonra istediğini kadar appler ekleye bilirmisini aşağıdaki kodu kullana bilirmisiniz.
+
 ```bash
+python manage.py startapp my_app
 
+```
 
+## Adım 10: Django Projeyi Çalıştırma
+Django projesini çalıştırmak için projenizin
+
+```bash
+python manage.py runserver
 ```
 
 
