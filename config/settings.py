@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ast20',
+    
 ]
 
 MIDDLEWARE = [
@@ -73,13 +75,22 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql', # Veritabanı motoru
+        'NAME': 'asterisk', # Veritabanı adı
+        'USER': 'molla', # Veritabanı kullanıcı adı
+        'PASSWORD': 'molla-neyapiyorsun-123456', # Veritabanı kullanıcı şifresi
+        'HOST': '192.168.0.244', # Veritabanı sunucu host adı veya IP adresi
+        'PORT': '3306', # Veritabanı sunucu port numarası
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

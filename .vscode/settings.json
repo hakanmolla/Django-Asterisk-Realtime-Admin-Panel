@@ -1,0 +1,17 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "192.168.0.244",
+            "port": 3306,
+            "driver": "MariaDB",
+            "name": "Asterisk-realtime",
+            "username": "molla",
+            "password": "molla-neyapiyorsun-123456",
+            "database": "asterisk"
+        }
+    ]
+}
