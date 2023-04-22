@@ -91,7 +91,7 @@ django-admin startproject myproject
 django-admin startproject config .
 
 ```
-
+<font color="red">Not:</font>
 Burada myproject, oluşturmak istediğiniz Django projesinin adıdır. İsterseniz başka bir isim de seçebilirsiniz.
 
 ## Adım 9: Django Projeyi Çalıştırma
