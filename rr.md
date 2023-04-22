@@ -99,14 +99,22 @@ Burada myproject, oluşturmak istediğiniz Django projesinin adıdır. İstersen
 
 
 ## Adım 9: Django Projeyi Çalıştırma
+
 Django Porjeniz oluştu şimdi bundan sonra istediğini kadar appler ekleye bilirmisini aşağıdaki kodu kullana bilirmisiniz.
 
 ```bash
 python manage.py startapp my_app
 
 ```
-
 ## Adım 10: Django Projeyi Çalıştırma
+
+Kurduğumuz tüm paketleri artık  requirements.txt aktarımını yapalım 
+
+```bash
+python -m pip freeze > requirements.txt
+```
+## Adım 11: Django Projeyi Çalıştırma
+
 Django projesini çalıştırmak için projenizin
 
 ```bash
