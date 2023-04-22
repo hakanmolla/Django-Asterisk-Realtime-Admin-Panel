@@ -15,14 +15,11 @@ Windows:
 python get-pip.py
 ```
 
-
 macOS/Linux:
 
 ```bash
 curl https://bootstrap.pypa.io/get-pip.py | python3
 ```
-
-
 
 
 ## Adım 3: Virtualenv Kurulumu
@@ -34,66 +31,75 @@ pip install virtualenv
 
 ```
 
-
-Adım 3: Sanal Ortam Oluşturma
+## Adım 4: Sanal Ortam Oluşturma
 Sanal ortam oluşturmak için projenizin ana dizininde bir klasör oluşturun. Bu klasör, sanal ortamınızın kök dizini olacaktır. Ardından, aşağıdaki komutu girerek sanal ortamı oluşturabilirsiniz:
 
-bash
+Windows:
 ```bash
-
+python -m venv project-name
 
 ```
-virtualenv myenv
+macOS/Linux:
 
-Burada myenv, oluşturmak istediğiniz sanal ortamın adıdır. İsterseniz başka bir isim de seçebilirsiniz.
+```bash
+python3 -m venv project-name
 
-Adım 4: Sanal Ortamı Aktif Etme
+```
+
+Burada **project-name**, oluşturmak istediğiniz sanal ortamın adıdır. İsterseniz başka bir isim de seçebilirsiniz.
+
+## Adım 5: Sanal Ortamı Aktif Etme
 Sanal ortamı etkinleştirmek için aşağıdaki komutları kullanabilirsiniz:
 
 Windows:
 ```bash
 
+project-name\Scripts\activate
 
 ```
-myenv\Scripts\activate
 
 Unix veya Linux:
 ```bash
-
+source myenv/bin/activate
 
 ```
 
-source myenv/bin/activate
 
-
-Adım 5: Django Kurulumu
+## Adım 6: Django Kurulumu
 Sanal ortamınız etkinleştirildiğinde, projenizin kök dizininde bulunan pip paket yöneticisini kullanarak Django paketini yükleyebilirsiniz:
 
 ```bash
-
-
-```
 pip install django
-```bash
-
 
 ```
 
-Adım 6: Django Projesi Oluşturma
+## Adım 7: Colorama Eklentisi (isteğe bağlı)
+Colorama, Python dilinde terminal üzerinde renkli yazılar yazmak için kullanılan bir pakettir.
+
+py -m pip install colorama
+
+## Adım 8: Django Projesi Oluşturma
 Django paketini başarıyla yükledikten sonra, sanal ortamınızda bir Django projesi oluşturabilirsiniz. Aşağıdaki komutu kullanarak Django projesi oluşturabilirsiniz:
 
 ```bash
-
-
-```
 django-admin startproject myproject
 
+```
+<span style="color:red">Not!: Benim tavsiyem **config** olarak oluşturmanız ve sonuna . koymanız olacaktır. </span>
+
+```bash
+django-admin startproject config .
+
+```
 
 Burada myproject, oluşturmak istediğiniz Django projesinin adıdır. İsterseniz başka bir isim de seçebilirsiniz.
 
-Adım 7: Django Projeyi Çalıştırma
+## Adım 9: Django Projeyi Çalıştırma
 Django projesini çalıştırmak için projenizin
 ```bash
 
 
 ```
+
+
+
