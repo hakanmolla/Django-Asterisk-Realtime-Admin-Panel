@@ -85,14 +85,15 @@ Django paketini başarıyla yükledikten sonra, sanal ortamınızda bir Django p
 django-admin startproject myproject
 
 ```
-Burada myproject, oluşturmak istediğiniz Django projesinin adıdır. İsterseniz başka bir isim de seçebilirsiniz.
-
-<span style="color:red">**Not!: Benim tavsiyem **config** olarak oluşturmanız ve sonuna . koymanız olacaktır.** </span>
+<span style="color:red">Not!: Benim tavsiyem **config** olarak oluşturmanız ve sonuna . koymanız olacaktır. </span>
 
 ```bash
 django-admin startproject config .
 
 ```
+<font color="red">Not:</font>
+Burada myproject, oluşturmak istediğiniz Django projesinin adıdır. İsterseniz başka bir isim de seçebilirsiniz.
+
 ## Adım 9: Django Projeyi Çalıştırma
 Django Porjeniz oluştu şimdi bundan sonra istediğini kadar appler ekleye bilirmisini aşağıdaki kodu kullana bilirmisiniz.
 
