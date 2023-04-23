@@ -1,7 +1,7 @@
 # Django Admin Panel'i Kullanarak Asterisk Realtime Yönetimi: Telekomünikasyonunuzu Geliştirmenin Yeni Yolu
 
 ![Django](https://img.shields.io/badge/Django-3.2-green)
-![Asterisk](https://img.shields.io/badge/Asterisk-18.4-blue)
+![Asterisk](https://img.shields.io/badge/Asterisk-20.0-blue)
 
 
 Bu proje, Django admin paneli üzerinden Asterisk Realtime aracılığıyla aşağıdaki modülleri yönetmenize olanak sağlar:
