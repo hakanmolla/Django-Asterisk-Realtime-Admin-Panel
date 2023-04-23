@@ -74,24 +74,13 @@ while True:
                         if len(parts) == 2:
                             event_dict[parts[0]] = parts[1]
                     if 'Event' in event_dict and event_filter.match(event_dict['Event']):
-                        print(event_dict)
-                                                
+                        print(event_dict)                     
                         try:
                             event_name = event_dict['Event']  # event_name değerini al
                             event_data = str(event_dict)  # event_data değerini al
-                            print('//////////////////')
-                            print(event_name)
-                            print(event_data)
-                            print('//////////////////')
                              # Sütun isimlerini ve yer tutucuları dinamik olarak oluştur
                             column_names = ', '.join([f"`{column}`" for column in event_dict.keys()])
                             placeholders = ', '.join(['%s'] * len(event_dict))
-                            
-                            
-                            print('****************************')
-                            print(column_names)
-                            print(placeholders)
-                            print('************************')
                             cursor.execute(
                             f"INSERT INTO {table_name} ({column_names}) VALUES ({placeholders})",
                             tuple(event_dict.values())  # event_dict değerlerini tuple olarak gönder
