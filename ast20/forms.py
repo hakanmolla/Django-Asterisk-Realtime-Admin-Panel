@@ -1,38 +1,30 @@
-from django.contrib import admin
+from django import forms
 from .models import PsAors,PsAuths,PsEndpoints
-from .forms import PsAorsForm,PsAuthsForm,PsEndpointsForm
 
-
-
-
-
-@admin.register(PsAors,)
-class PsAorsAdmin(admin.ModelAdmin):
-    form = PsAorsForm
-    search_fields = ('id',)
-    list_display = ('id',
-                    'contact',
-                    'default_expiration',
-                    'mailboxes', 
-                    'max_contacts', 
-                    'minimum_expiration', 
-                    'remove_existing', 
-                    'qualify_frequency', 
-                    'authenticate_qualify',
-                    'maximum_expiration', 
-                    'outbound_proxy', 
-                    'support_path', 
-                    'qualify_timeout', 
-                    'voicemail_extension', 
-                    'remove_unavailable',)
-   
-  
-
-@admin.register(PsAuths)
-class PsAuthsAdmin(admin.ModelAdmin):
-    form = PsAuthsForm
-    search_fields = ('id',)
-    list_display =('id', 
+class PsAorsForm(forms.ModelForm):
+    class Meta:
+        model =  PsAors
+        fields=   ('id' ,
+    'contact', 
+    'default_expiration' ,
+    'mailboxes',
+    'max_contacts',
+    'minimum_expiration',
+    'remove_existing',
+    'qualify_frequency',
+    'authenticate_qualify' ,
+    'maximum_expiration', 
+    'outbound_proxy', 
+    'support_path', 
+    'qualify_timeout', 
+    'voicemail_extension' ,
+    'remove_unavailable',)
+        
+        
+class PsAuthsForm(forms.ModelForm):
+    class Meta:
+        model =  PsAuths
+        fields =  ('id', 
     'auth_type', 
     'nonce_lifetime',
     'md5_cred',
@@ -42,13 +34,11 @@ class PsAuthsAdmin(admin.ModelAdmin):
     'refresh_token', 
     'oauth_clientid', 
     'oauth_secret',)
-    
-
-@admin.register(PsEndpoints)
-class PsEndpointsAdmin(admin.ModelAdmin):
-    form = PsEndpointsForm
-    search_fields = ('id',)
-    list_display = (
+        
+class PsEndpointsForm(forms.ModelForm):
+    class Meta:
+        model =  PsEndpoints
+        fields =  (
     'id',      
     'transport',        
     'aors',       
@@ -190,52 +180,12 @@ class PsEndpointsAdmin(admin.ModelAdmin):
     'security_negotiation',        
     'security_mechanisms',     
     'send_aoc',        
-    'overlap_context',   )   
+    'overlap_context',   )     
+
+        
+      
+        
+           
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# from django.contrib import admin
-# from ast20.models import(PsAors,PsAuths,PsEndpoints)
-# @admin.register(PsAors)
-# class PsAorsAdmin(admin.ModelAdmin):
-#     search_fields = ('id')
-#     list_display = (
-#         'id',  )
-    
-
-# @admin.register(PsAuths)
-# class PsAuthsAdmin(admin.ModelAdmin):
-#     search_fields = ('id', )
-#     list_display = (
-#         'id', )
-    
-    
-    
-    
-    
-# @admin.register(PsEndpoints)
-# class PsEndpointsAdmin(admin.ModelAdmin):
-   
-#     search_fields = ('id')
-#     list_display = (
-#         'id', 'aors', 'auth','context','transport',
-#     )
+        
+        
