@@ -1,7 +1,32 @@
 from django.contrib import admin
-from .models import PsAors,PsAuths,PsEndpoints,PsContacts,PsEndpointIdIps,PsDomainAliases
+from .models import PsAors,PsAuths,PsEndpoints,PsContacts,PsEndpointIdIps,PsDomainAliases,PsjsipAdd
 from .forms import (PsAorsForm,PsAuthsForm,PsEndpointsForm,PsContactsForm,
-                    PsEndpointIdIpsForm,PsDomainAliasesForm)
+                    PsEndpointIdIpsForm,PsDomainAliasesForm,PsjsipAddForm)
+
+
+
+
+@admin.register(PsjsipAdd,)
+class PsjsipAddAdmin(admin.ModelAdmin):
+    form = PsjsipAddForm
+    search_fields = ('id',)
+    list_display =('id',
+                'transport', 
+                'aors',
+                'auth',
+                'context',
+                'disallow',
+                'allow',
+                'direct_media',
+                'mailboxes',
+                'deny',
+                'permit', 
+                'max_contacts',
+                'qualify_frequency',
+                'auth_type',
+                'password', 
+                'username', )
+
 
 
 

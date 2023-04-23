@@ -1,5 +1,6 @@
 from django import forms
-from .models import PsAors,PsAuths,PsEndpoints,PsContacts,PsEndpointIdIps,PsDomainAliases
+from .models import (PsAors,PsAuths,PsEndpoints,PsContacts,
+                     PsEndpointIdIps,PsDomainAliases,PsjsipAdd,)
 
 class PsAorsForm(forms.ModelForm):
     class Meta:
@@ -205,7 +206,29 @@ class PsContactsForm(forms.ModelForm):
     'prune_on_boot',  )          
     
         
+class PsjsipAddForm(forms.ModelForm):
+    class Meta:
+        model =  PsjsipAdd
+        fields= ( 'id',
+                'transport', 
+                'aors',
+                'auth',
+                'context',
+                'disallow',
+                'allow',
+                'direct_media',
+                'mailboxes',
+                'deny',
+                'permit', 
+                'max_contacts',
+                'qualify_frequency',
+                'auth_type',
+                'password', 
+                'username', )  
+        
+        
     
+          
 
 
 class PsEndpointIdIpsForm(forms.ModelForm):
