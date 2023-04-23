@@ -4,8 +4,6 @@ from .forms import (PsAorsForm,PsAuthsForm,PsEndpointsForm,PsContactsForm,
                     PsEndpointIdIpsForm,PsDomainAliasesForm,PsjsipAddForm)
 
 
-
-
 @admin.register(PsjsipAdd,)
 class PsjsipAddAdmin(admin.ModelAdmin):
     form = PsjsipAddForm
@@ -25,7 +23,19 @@ class PsjsipAddAdmin(admin.ModelAdmin):
                 'qualify_frequency',
                 'auth_type',
                 'password', 
-                'username', )
+                'username',)
+    actions = ['delete_model'] # delete_model yöntemini actions özelliğine ekledik
+    
+
+    @admin.action(description='!!!PsjsipAdd Delete!!!')
+    def delete_model(self, request, queryset):
+         id_degeri = queryset[0].id
+         ps_endpoints = PsEndpoints.objects.get(id=id_degeri)
+         ps_endpoints.delete()
+         ps_aors = PsAors.objects.get(id=id_degeri)
+         ps_aors.delete()
+         ps_auths =PsAuths.objects.get(id=id_degeri)
+         ps_auths.delete()
 
 
 

@@ -1,6 +1,6 @@
 from django.db import models
-
-
+     
+ 
 class PsAuths(models.Model):
     id = models.CharField(primary_key=True,unique=True, max_length=40)
     auth_type = models.CharField(max_length=12, blank=True, null=True)
@@ -12,35 +12,42 @@ class PsAuths(models.Model):
     refresh_token = models.CharField(max_length=255, blank=True, null=True)
     oauth_clientid = models.CharField(max_length=255, blank=True, null=True)
     oauth_secret = models.CharField(max_length=255, blank=True, null=True)
-
+    PsjsipAdd = models.CharField(max_length=255, blank=True, null=True) #models.ForeignKey(PsjsipAdd, on_delete=models.CASCADE, related_name='PsAuths',default='Değer',)
+    
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'ps_auths'
         verbose_name = 'ps_auths'
         verbose_name_plural = 'ps_auths'
 
 
 class PsAors(models.Model):
-
+    MY_CHOICES = [
+        ('yes', 'Yes'),
+        ('no', 'No'),
+    ]
     
     id = models.CharField(primary_key=True,unique=True, max_length=40)
     contact = models.CharField(max_length=255, blank=True, null=True)
     default_expiration = models.IntegerField(blank=True, null=True)
-    mailboxes = models.CharField(max_length=80, blank=True, null=True)
-    max_contacts = models.IntegerField(blank=True, null=True)
-    minimum_expiration = models.IntegerField(blank=True, null=True)
+    mailboxes = models.CharField(max_length=80, blank=True, null=True, choices=MY_CHOICES)
+    max_contacts = models.IntegerField(blank=True, null=True,default="1")
+    minimum_expiration = models.IntegerField(blank=True, null=True,default="60")
     remove_existing = models.CharField(max_length=3, blank=True, null=True)
-    qualify_frequency = models.IntegerField(blank=True, null=True)
+    qualify_frequency = models.IntegerField(blank=True, null=True,default="120")
     authenticate_qualify = models.CharField(max_length=3, blank=True, null=True)
-    maximum_expiration = models.IntegerField(blank=True, null=True)
+    maximum_expiration = models.IntegerField(blank=True, null=True,default="7200")
     outbound_proxy = models.CharField(max_length=40, blank=True, null=True)
     support_path = models.CharField(max_length=3, blank=True, null=True)
     qualify_timeout = models.FloatField(blank=True, null=True)
     voicemail_extension = models.CharField(max_length=40, blank=True, null=True)
     remove_unavailable = models.CharField(max_length=5, blank=True, null=True)
+    PsjsipAdd = models.CharField(max_length=255, blank=True, null=True) 
+    #PsjsipAdd = models.ForeignKey(PsjsipAdd, on_delete=models.CASCADE, related_name='PsAors',default='Değer',)
+    
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'ps_aors'
         verbose_name = 'ps_aors'
         verbose_name_plural = 'ps_aors'
@@ -189,17 +196,17 @@ class PsEndpoints(models.Model):
     security_mechanisms = models.CharField(max_length=512, blank=True, null=True)
     send_aoc = models.CharField(max_length=5, blank=True, null=True)
     overlap_context = models.CharField(max_length=80, blank=True, null=True)
-
+    PsjsipAdd = models.CharField(max_length=255, blank=True, null=True) 
+    #PsjsipAdd = models.ForeignKey(PsjsipAdd, on_delete=models.CASCADE, related_name='PsEndpoints',default='Değer' )
     class Meta:
         verbose_name = 'PsEndpoints'
         verbose_name_plural = 'PsEndpoints'
-        managed = False
+       # managed = False
         db_table = 'ps_endpoints'
-              
-
-
-
-
+               
+        
+        
+        
 class PsjsipAdd(models.Model):
     # MyCustomModel modeline ait alanlar
     #endpoisnt ortakları start
@@ -225,11 +232,27 @@ class PsjsipAdd(models.Model):
     auth_type = models.CharField(max_length=12, blank=True, null=True)
     password = models.CharField(max_length=80, blank=True, null=True)
     username = models.CharField(max_length=40, blank=True, null=True)
+    DahiliGrup = models.CharField(max_length=40, blank=True, null=True)
+    Sube = models.CharField(max_length=40, blank=True, null=True)
+    ps_aors = models.ForeignKey(PsAors, on_delete=models.CASCADE, blank=True,default='Değer',)
+    ps_endpoints = models.ForeignKey(PsEndpoints, on_delete=models.CASCADE, blank=True, default='Değer',)
+    ps_auths = models.ForeignKey(PsAuths, on_delete=models.CASCADE, blank=True, default='Değer',)
+    
+     
+    
+    class Meta:
+        # managed = False
+        db_table = 'PsjsipAdd'
+        verbose_name = 'PsjsipAdd'
+        verbose_name_plural = 'PsjsipAdd'
     
 
+
+
     def save(self, *args, **kwargs):
+        # psauths = PsAuths.objects.get(id=self.id) 
         # PsAors, PsAuths ve PsEndpoints modellerine de veri eklenmesini sağlayan kodlar
-        ps_aors = PsEndpoints( id = self.id,
+        ps_endpoints = PsEndpoints.objects.create( id = self.id,
                         transport =self.transport,
                         aors =self.aors,
                         auth = self.auth,
@@ -239,34 +262,28 @@ class PsjsipAdd(models.Model):
                         direct_media =self.direct_media, 
                         mailboxes =self.mailboxes,
                         deny = self.deny,
-                        permit = self.permit,)
-        ps_aors.save()
-        ps_auths = PsAors(id = self.id,
+                        permit = self.permit,
+                        )
+        ps_endpoints.save()
+        ps_aors = PsAors.objects.create(id = self.id,
                            max_contacts=self.max_contacts,
                            qualify_frequency=self.qualify_frequency,
                            
                            )
-        ps_auths.save()
-        ps_endpoints = PsAuths(id = self.id,
+        ps_aors.save()
+        ps_auths = PsAuths.objects.create(id = self.id,
                                auth_type=self.auth_type,
                                password=self.password,
                                username=self.username,
+                               
                                )
-        ps_endpoints.save()
+        ps_auths.save()
 
         self.ps_aors = ps_aors
         self.ps_auths = ps_auths
         self.ps_endpoints = ps_endpoints
 
-        super(PsjsipAdd, self).save(*args, **kwargs)
-        
-        
-        
-        
-        
-        
-        
-        
+        super(PsjsipAdd, self).save(*args, **kwargs)       
         
 
 class PsContacts(models.Model):

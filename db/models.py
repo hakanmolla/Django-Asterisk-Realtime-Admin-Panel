@@ -1,4 +1,5 @@
 from django.db import models
+from ast20.models import PsAors,PsAuths,PsEndpoints
 
 # Create your models here.
 
@@ -27,6 +28,9 @@ class PsjsipAdd(models.Model):
     auth_type = models.CharField(max_length=12, blank=True, null=True)
     password = models.CharField(max_length=80, blank=True, null=True)
     username = models.CharField(max_length=40, blank=True, null=True)
+    aors = models.ForeignKey(PsAors, on_delete=models.CASCADE,related_name='aors',null=True)
+    auth = models.ForeignKey(PsAuths, on_delete=models.CASCADE,related_name='auth',null=True)
+    PsEndpoints = models.ForeignKey(PsEndpoints, on_delete=models.CASCADE,related_name='endpoints',null=True)
     
 
     # def save(self, *args, **kwargs):
