@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import PsAors,PsAuths,PsEndpoints
-from .forms import PsAorsForm,PsAuthsForm,PsEndpointsForm
+from .models import PsAors,PsAuths,PsEndpoints,PsContacts,PsEndpointIdIps,PsDomainAliases
+from .forms import (PsAorsForm,PsAuthsForm,PsEndpointsForm,PsContactsForm,
+                    PsEndpointIdIpsForm,PsDomainAliasesForm)
 
 
 
@@ -193,6 +194,45 @@ class PsEndpointsAdmin(admin.ModelAdmin):
     'overlap_context',   )   
     
 
+@admin.register(PsContacts,)
+class PsAorsAdmin(admin.ModelAdmin):
+    form = PsContactsForm
+    search_fields = ('id',)
+    list_display = ('id',     
+    'uri',     
+    'expiration_time',    
+    'qualify_frequency',     
+    'outbound_proxy',     
+    'path',     
+    'user_agent',   
+    'qualify_timeout',  
+    'reg_server',    
+    'authenticate_qualify',     
+    'via_addr',     
+    'via_port',     
+    'call_id',    
+    'endpoint',   
+    'prune_on_boot',  )   
+
+
+
+@admin.register(PsEndpointIdIps,)
+class PsAorsAdmin(admin.ModelAdmin):
+    form = PsEndpointIdIpsForm
+    search_fields = ('id',)
+    list_display = ('id', 
+    'endpoint',    
+    'match',  
+    'srv_lookups',    
+    'match_header', )
+
+
+
+@admin.register(PsDomainAliases,)
+class PsAorsAdmin(admin.ModelAdmin):
+    form = PsDomainAliasesForm
+    search_fields = ('id',)
+    list_display =('id', 'domain',)
 
 
 
@@ -201,41 +241,3 @@ class PsEndpointsAdmin(admin.ModelAdmin):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-# from django.contrib import admin
-# from ast20.models import(PsAors,PsAuths,PsEndpoints)
-# @admin.register(PsAors)
-# class PsAorsAdmin(admin.ModelAdmin):
-#     search_fields = ('id')
-#     list_display = (
-#         'id',  )
-    
-
-# @admin.register(PsAuths)
-# class PsAuthsAdmin(admin.ModelAdmin):
-#     search_fields = ('id', )
-#     list_display = (
-#         'id', )
-    
-    
-    
-    
-    
-# @admin.register(PsEndpoints)
-# class PsEndpointsAdmin(admin.ModelAdmin):
-   
-#     search_fields = ('id')
-#     list_display = (
-#         'id', 'aors', 'auth','context','transport',
-#     )

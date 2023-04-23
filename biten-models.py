@@ -1,29 +1,6 @@
-from django.db import models
-
-
-class PsAuths(models.Model):
-    id = models.CharField(primary_key=True,unique=True, max_length=40)
-    auth_type = models.CharField(max_length=12, blank=True, null=True)
-    nonce_lifetime = models.IntegerField(blank=True, null=True)
-    md5_cred = models.CharField(max_length=40, blank=True, null=True)
-    password = models.CharField(max_length=80, blank=True, null=True)
-    realm = models.CharField(max_length=40, blank=True, null=True)
-    username = models.CharField(max_length=40, blank=True, null=True)
-    refresh_token = models.CharField(max_length=255, blank=True, null=True)
-    oauth_clientid = models.CharField(max_length=255, blank=True, null=True)
-    oauth_secret = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ps_auths'
-        verbose_name = 'ps_auths'
-        verbose_name_plural = 'ps_auths'
-
 
 class PsAors(models.Model):
-
-    
-    id = models.CharField(primary_key=True,unique=True, max_length=40)
+    id = models.CharField(unique=True, max_length=40)
     contact = models.CharField(max_length=255, blank=True, null=True)
     default_expiration = models.IntegerField(blank=True, null=True)
     mailboxes = models.CharField(max_length=80, blank=True, null=True)
@@ -42,12 +19,31 @@ class PsAors(models.Model):
     class Meta:
         managed = False
         db_table = 'ps_aors'
-        verbose_name = 'ps_aors'
-        verbose_name_plural = 'ps_aors'
-            
 
+
+
+
+class PsAuths(models.Model):
+    id = models.CharField(unique=True, max_length=40)
+    auth_type = models.CharField(max_length=12, blank=True, null=True)
+    nonce_lifetime = models.IntegerField(blank=True, null=True)
+    md5_cred = models.CharField(max_length=40, blank=True, null=True)
+    password = models.CharField(max_length=80, blank=True, null=True)
+    realm = models.CharField(max_length=40, blank=True, null=True)
+    username = models.CharField(max_length=40, blank=True, null=True)
+    refresh_token = models.CharField(max_length=255, blank=True, null=True)
+    oauth_clientid = models.CharField(max_length=255, blank=True, null=True)
+    oauth_secret = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'ps_auths'
+        
+        
+        
+        
 class PsEndpoints(models.Model):
-    id = models.CharField(primary_key=True,unique=True, max_length=40)
+    id = models.CharField(unique=True, max_length=40)
     transport = models.CharField(max_length=40, blank=True, null=True)
     aors = models.CharField(max_length=200, blank=True, null=True)
     auth = models.CharField(max_length=40, blank=True, null=True)
@@ -191,41 +187,14 @@ class PsEndpoints(models.Model):
     overlap_context = models.CharField(max_length=80, blank=True, null=True)
 
     class Meta:
-        verbose_name = 'PsEndpoints'
-        verbose_name_plural = 'PsEndpoints'
         managed = False
         db_table = 'ps_endpoints'
-              
 
-class PsContacts(models.Model):
-    id = models.CharField(primary_key=True,unique=True, max_length=255, blank=True, )
-    uri = models.CharField(max_length=511, blank=True, null=True)
-    expiration_time = models.BigIntegerField(blank=True, null=True)
-    qualify_frequency = models.IntegerField(blank=True, null=True)
-    outbound_proxy = models.CharField(max_length=40, blank=True, null=True)
-    path = models.TextField(blank=True, null=True)
-    user_agent = models.CharField(max_length=255, blank=True, null=True)
-    qualify_timeout = models.FloatField(blank=True, null=True)
-    reg_server = models.CharField(max_length=255, blank=True, null=True)
-    authenticate_qualify = models.CharField(max_length=3, blank=True, null=True)
-    via_addr = models.CharField(max_length=40, blank=True, null=True)
-    via_port = models.IntegerField(blank=True, null=True)
-    call_id = models.CharField(max_length=255, blank=True, null=True)
-    endpoint = models.CharField(max_length=40, blank=True, null=True)
-    prune_on_boot = models.CharField(max_length=3, blank=True, null=True)
 
-    class Meta:
-        managed = False
-        db_table = 'ps_contacts'
-        verbose_name = 'ps_contacts'
-        verbose_name_plural = 'ps_contacts'
-        unique_together = (('id', 'reg_server'),)
-        
-        
-        
+
 
 class PsEndpointIdIps(models.Model):
-    id = models.CharField(primary_key=True,unique=True, max_length=40)
+    id = models.CharField(unique=True, max_length=40)
     endpoint = models.CharField(max_length=40, blank=True, null=True)
     match = models.CharField(max_length=80, blank=True, null=True)
     srv_lookups = models.CharField(max_length=3, blank=True, null=True)
@@ -234,26 +203,16 @@ class PsEndpointIdIps(models.Model):
     class Meta:
         managed = False
         db_table = 'ps_endpoint_id_ips'
-        verbose_name = 'PsEndpointIdIps'
-        verbose_name_plural = 'PsEndpointIdIps'
+        
         
         
 
+
+
 class PsDomainAliases(models.Model):
-    id = models.CharField(primary_key=True,unique=True, max_length=40)
+    id = models.CharField(unique=True, max_length=40)
     domain = models.CharField(max_length=80, blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'ps_domain_aliases'
-        verbose_name = 'PsDomainAliases'
-        verbose_name_plural = 'PsDomainAliases'
-
-
-
-
-
-
-
-      
-

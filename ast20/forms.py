@@ -1,5 +1,5 @@
 from django import forms
-from .models import PsAors,PsAuths,PsEndpoints
+from .models import PsAors,PsAuths,PsEndpoints,PsContacts,PsEndpointIdIps,PsDomainAliases
 
 class PsAorsForm(forms.ModelForm):
     class Meta:
@@ -185,7 +185,44 @@ class PsEndpointsForm(forms.ModelForm):
         
       
         
-           
+class PsContactsForm(forms.ModelForm):
+    class Meta:
+        model =  PsContacts
+        fields= ('id',     
+    'uri',     
+    'expiration_time',    
+    'qualify_frequency',     
+    'outbound_proxy',     
+    'path',     
+    'user_agent',   
+    'qualify_timeout',  
+    'reg_server',    
+    'authenticate_qualify',     
+    'via_addr',     
+    'via_port',     
+    'call_id',    
+    'endpoint',   
+    'prune_on_boot',  )          
     
+        
+    
+
+
+class PsEndpointIdIpsForm(forms.ModelForm):
+    class Meta:
+        model =  PsEndpointIdIps
+        fields= ('id', 
+    'endpoint',    
+    'match',  
+    'srv_lookups',    
+    'match_header', )
+
+
+
+
+class PsDomainAliasesForm(forms.ModelForm):
+    class Meta:
+        model =  PsDomainAliases
+        fields= ('id', 'domain',)
         
         
