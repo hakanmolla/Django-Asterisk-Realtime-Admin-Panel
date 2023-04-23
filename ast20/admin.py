@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import PsAors,PsAuths,PsEndpoints,PsContacts,PsEndpointIdIps,PsDomainAliases,PsjsipAdd
+from .models import(PsAors,PsAuths,PsEndpoints,PsContacts,PsEndpointIdIps,
+                    PsDomainAliases,PsjsipAdd,CustemCdrTables)
 from .forms import (PsAorsForm,PsAuthsForm,PsEndpointsForm,PsContactsForm,
                     PsEndpointIdIpsForm,PsDomainAliasesForm,PsjsipAddForm)
 
@@ -268,6 +269,50 @@ class PsAorsAdmin(admin.ModelAdmin):
     form = PsDomainAliasesForm
     search_fields = ('id',)
     list_display =('id', 'domain',)
+    
+    
+
+@admin.register(CustemCdrTables,)
+class CustemCdrTablesAdmin(admin.ModelAdmin):
+    
+    search_fields = ('id',)
+    list_display =('Event',
+                    'Privilege',
+                    'SequenceNumber' ,
+                    'File' , 
+                    'Line',
+                    'Func' ,
+                    'AccountCode',
+                    'Source' , 
+                    'Destination' ,
+                    'DestinationContext',
+                    'CallerID' ,
+                    'Channel',
+                    'DestinationChannel' ,
+                    'LastApplication', 
+                    'LastData',
+                    'StartTime',
+                    'AnswerTime',
+                    'EndTime', 
+                    'Duration',
+                    'BillableSeconds',
+                    'Disposition',
+                    'AMAFlags',
+                    'UniqueID',
+                    'UserField', 
+                    'Rate', 
+                    'Carrier', 
+                    'Calltype', 
+                    'Companyid', 
+                    'Specialid', 
+                    'Recordid', 
+                    'Likid', )
+    
+    
+    
+
+
+
 
 
 

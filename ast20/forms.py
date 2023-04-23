@@ -210,21 +210,17 @@ class PsjsipAddForm(forms.ModelForm):
     class Meta:
         model =  PsjsipAdd
         fields= ( 'id',
-                'transport', 
-                'aors',
-                'auth',
-                'context',
-                'disallow',
-                'allow',
-                'direct_media',
                 'mailboxes',
-                'deny',
-                'permit', 
-                'max_contacts',
-                'qualify_frequency',
-                'auth_type',
                 'password', 
-                'username', )  
+                'username', )
+         
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        instance.aors = self.cleaned_data['id'] 
+        instance.auth = self.cleaned_data['id'] 
+        if commit:
+            instance.save()
+        return instance
         
         
     

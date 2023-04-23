@@ -1,5 +1,4 @@
 from django.db import models
-     
  
 class PsAuths(models.Model):
     id = models.CharField(primary_key=True,unique=True, max_length=40)
@@ -19,7 +18,6 @@ class PsAuths(models.Model):
         db_table = 'ps_auths'
         verbose_name = 'ps_auths'
         verbose_name_plural = 'ps_auths'
-
 
 class PsAors(models.Model):
     MY_CHOICES = [
@@ -55,51 +53,51 @@ class PsAors(models.Model):
 
 class PsEndpoints(models.Model):
     id = models.CharField(primary_key=True,unique=True, max_length=40)
-    transport = models.CharField(max_length=40, blank=True, null=True)
+    transport = models.CharField(max_length=40, blank=True, null=True,default="transport-udp")
     aors = models.CharField(max_length=200, blank=True, null=True)
     auth = models.CharField(max_length=40, blank=True, null=True)
-    context = models.CharField(max_length=40, blank=True, null=True)
+    context = models.CharField(max_length=40, blank=True, null=True,default="testing")
     disallow = models.CharField(max_length=200, blank=True, null=True)
     allow = models.CharField(max_length=200, blank=True, null=True)
-    direct_media = models.CharField(max_length=3, blank=True, null=True)
+    direct_media = models.CharField(max_length=3, blank=True, null=True,default="no")
     connected_line_method = models.CharField(max_length=8, blank=True, null=True)
     direct_media_method = models.CharField(max_length=8, blank=True, null=True)
     direct_media_glare_mitigation = models.CharField(max_length=8, blank=True, null=True)
     disable_direct_media_on_nat = models.CharField(max_length=3, blank=True, null=True)
-    dtmf_mode = models.CharField(max_length=9, blank=True, null=True)
+    dtmf_mode = models.CharField(max_length=9, blank=True, null=True,default="rfc4733")
     external_media_address = models.CharField(max_length=40, blank=True, null=True)
-    force_rport = models.CharField(max_length=3, blank=True, null=True)
-    ice_support = models.CharField(max_length=3, blank=True, null=True)
+    force_rport = models.CharField(max_length=3, blank=True, null=True,default="yes")
+    ice_support = models.CharField(max_length=3, blank=True, null=True,default="no")
     identify_by = models.CharField(max_length=80, blank=True, null=True)
     mailboxes = models.CharField(max_length=40, blank=True, null=True)
-    moh_suggest = models.CharField(max_length=40, blank=True, null=True)
+    moh_suggest = models.CharField(max_length=40, blank=True, null=True,default="default")
     outbound_auth = models.CharField(max_length=40, blank=True, null=True)
     outbound_proxy = models.CharField(max_length=40, blank=True, null=True)
-    rewrite_contact = models.CharField(max_length=3, blank=True, null=True)
+    rewrite_contact = models.CharField(max_length=3, blank=True, null=True,default="yes")
     rtp_ipv6 = models.CharField(max_length=3, blank=True, null=True)
-    rtp_symmetric = models.CharField(max_length=3, blank=True, null=True)
+    rtp_symmetric = models.CharField(max_length=3, blank=True, null=True,default="yes")
     send_diversion = models.CharField(max_length=3, blank=True, null=True)
-    send_pai = models.CharField(max_length=3, blank=True, null=True)
+    send_pai = models.CharField(max_length=3, blank=True, null=True,default="yes")
     send_rpid = models.CharField(max_length=3, blank=True, null=True)
     timers_min_se = models.IntegerField(blank=True, null=True)
-    timers = models.CharField(max_length=8, blank=True, null=True)
+    timers = models.CharField(max_length=8, blank=True, null=True,default="yes")
     timers_sess_expires = models.IntegerField(blank=True, null=True)
     callerid = models.CharField(max_length=40, blank=True, null=True)
     callerid_privacy = models.CharField(max_length=23, blank=True, null=True)
     callerid_tag = models.CharField(max_length=40, blank=True, null=True)
     number_100rel = models.CharField(db_column='100rel', max_length=14, blank=True, null=True)  # Field renamed because it wasn't a valid Python identifier.
-    aggregate_mwi = models.CharField(max_length=3, blank=True, null=True)
-    trust_id_inbound = models.CharField(max_length=3, blank=True, null=True)
+    aggregate_mwi = models.CharField(max_length=3, blank=True, null=True,default="yes")
+    trust_id_inbound = models.CharField(max_length=3, blank=True, null=True,default="yes")
     trust_id_outbound = models.CharField(max_length=3, blank=True, null=True)
     use_ptime = models.CharField(max_length=3, blank=True, null=True)
-    use_avpf = models.CharField(max_length=3, blank=True, null=True)
-    media_encryption = models.CharField(max_length=4, blank=True, null=True)
-    inband_progress = models.CharField(max_length=3, blank=True, null=True)
+    use_avpf = models.CharField(max_length=3, blank=True, null=True,default="no")
+    media_encryption = models.CharField(max_length=4, blank=True, null=True,default="no")
+    inband_progress = models.CharField(max_length=3, blank=True, null=True,default="no")
     call_group = models.CharField(max_length=40, blank=True, null=True)
     pickup_group = models.CharField(max_length=40, blank=True, null=True)
     named_call_group = models.CharField(max_length=40, blank=True, null=True)
     named_pickup_group = models.CharField(max_length=40, blank=True, null=True)
-    device_state_busy_at = models.IntegerField(blank=True, null=True)
+    device_state_busy_at = models.IntegerField(blank=True, null=True,default="3")
     fax_detect = models.CharField(max_length=3, blank=True, null=True)
     t38_udptl = models.CharField(max_length=3, blank=True, null=True)
     t38_udptl_ec = models.CharField(max_length=10, blank=True, null=True)
@@ -108,16 +106,16 @@ class PsEndpoints(models.Model):
     t38_udptl_ipv6 = models.CharField(max_length=3, blank=True, null=True)
     tone_zone = models.CharField(max_length=40, blank=True, null=True)
     language = models.CharField(max_length=40, blank=True, null=True)
-    one_touch_recording = models.CharField(max_length=3, blank=True, null=True)
-    record_on_feature = models.CharField(max_length=40, blank=True, null=True)
-    record_off_feature = models.CharField(max_length=40, blank=True, null=True)
+    one_touch_recording = models.CharField(max_length=3, blank=True, null=True,default="no")
+    record_on_feature = models.CharField(max_length=40, blank=True, null=True,default="apprecord")
+    record_off_feature = models.CharField(max_length=40, blank=True, null=True,default="apprecord")
     rtp_engine = models.CharField(max_length=40, blank=True, null=True)
     allow_transfer = models.CharField(max_length=3, blank=True, null=True)
-    allow_subscribe = models.CharField(max_length=3, blank=True, null=True)
+    allow_subscribe = models.CharField(max_length=3, blank=True, null=True,default="yes")
     sdp_owner = models.CharField(max_length=40, blank=True, null=True)
     sdp_session = models.CharField(max_length=40, blank=True, null=True)
-    tos_audio = models.CharField(max_length=10, blank=True, null=True)
-    tos_video = models.CharField(max_length=10, blank=True, null=True)
+    tos_audio = models.CharField(max_length=10, blank=True, null=True,default="ef")
+    tos_video = models.CharField(max_length=10, blank=True, null=True,default="af41")
     sub_min_expiry = models.IntegerField(blank=True, null=True)
     from_domain = models.CharField(max_length=40, blank=True, null=True)
     from_user = models.CharField(max_length=40, blank=True, null=True)
@@ -134,25 +132,25 @@ class PsEndpoints(models.Model):
     media_address = models.CharField(max_length=40, blank=True, null=True)
     redirect_method = models.CharField(max_length=9, blank=True, null=True)
     set_var = models.TextField(blank=True, null=True)
-    cos_audio = models.IntegerField(blank=True, null=True)
-    cos_video = models.IntegerField(blank=True, null=True)
+    cos_audio = models.IntegerField(blank=True, null=True,default="5")
+    cos_video = models.IntegerField(blank=True, null=True,default="4")
     message_context = models.CharField(max_length=40, blank=True, null=True)
     force_avp = models.CharField(max_length=3, blank=True, null=True)
-    media_use_received_transport = models.CharField(max_length=3, blank=True, null=True)
+    media_use_received_transport = models.CharField(max_length=3, blank=True, null=True,default="no")
     accountcode = models.CharField(max_length=80, blank=True, null=True)
-    user_eq_phone = models.CharField(max_length=3, blank=True, null=True)
+    user_eq_phone = models.CharField(max_length=3, blank=True, null=True,default="no")
     moh_passthrough = models.CharField(max_length=3, blank=True, null=True)
-    media_encryption_optimistic = models.CharField(max_length=3, blank=True, null=True)
+    media_encryption_optimistic = models.CharField(max_length=3, blank=True, null=True,default="no")
     rpid_immediate = models.CharField(max_length=3, blank=True, null=True)
     g726_non_standard = models.CharField(max_length=3, blank=True, null=True)
     rtp_keepalive = models.IntegerField(blank=True, null=True)
-    rtp_timeout = models.IntegerField(blank=True, null=True)
-    rtp_timeout_hold = models.IntegerField(blank=True, null=True)
+    rtp_timeout = models.IntegerField(blank=True, null=True,default="120")
+    rtp_timeout_hold = models.IntegerField(blank=True, null=True,default="300")
     bind_rtp_to_media_address = models.CharField(max_length=3, blank=True, null=True)
     voicemail_extension = models.CharField(max_length=40, blank=True, null=True)
     mwi_subscribe_replaces_unsolicited = models.CharField(max_length=5, blank=True, null=True)
-    deny = models.CharField(max_length=95, blank=True, null=True)
-    permit = models.CharField(max_length=95, blank=True, null=True)
+    deny = models.CharField(max_length=95, blank=True, null=True,default="0.0.0.0/0")
+    permit = models.CharField(max_length=95, blank=True, null=True,default="0.0.0.0/0")
     acl = models.CharField(max_length=40, blank=True, null=True)
     contact_deny = models.CharField(max_length=95, blank=True, null=True)
     contact_permit = models.CharField(max_length=95, blank=True, null=True)
@@ -162,7 +160,7 @@ class PsEndpoints(models.Model):
     contact_user = models.CharField(max_length=80, blank=True, null=True)
     preferred_codec_only = models.CharField(max_length=3, blank=True, null=True)
     asymmetric_rtp_codec = models.CharField(max_length=3, blank=True, null=True)
-    rtcp_mux = models.CharField(max_length=3, blank=True, null=True)
+    rtcp_mux = models.CharField(max_length=3, blank=True, null=True,default="no")
     allow_overlap = models.CharField(max_length=3, blank=True, null=True)
     refer_blind_progress = models.CharField(max_length=3, blank=True, null=True)
     notify_early_inuse_ringing = models.CharField(max_length=3, blank=True, null=True)
@@ -177,7 +175,7 @@ class PsEndpoints(models.Model):
     accept_multiple_sdp_answers = models.CharField(max_length=3, blank=True, null=True)
     suppress_q850_reason_headers = models.CharField(max_length=3, blank=True, null=True)
     trust_connected_line = models.CharField(max_length=5, blank=True, null=True)
-    send_connected_line = models.CharField(max_length=5, blank=True, null=True)
+    send_connected_line = models.CharField(max_length=5, blank=True, null=True,default="yes")
     ignore_183_without_sdp = models.CharField(max_length=5, blank=True, null=True)
     codec_prefs_incoming_offer = models.CharField(max_length=128, blank=True, null=True)
     codec_prefs_outgoing_offer = models.CharField(max_length=128, blank=True, null=True)
@@ -203,33 +201,23 @@ class PsEndpoints(models.Model):
         verbose_name_plural = 'PsEndpoints'
        # managed = False
         db_table = 'ps_endpoints'
-               
-        
-        
+                      
         
 class PsjsipAdd(models.Model):
-    # MyCustomModel modeline ait alanlar
-    #endpoisnt ortakları start
     id = models.CharField(primary_key=True,unique=True, max_length=40)
-    transport = models.CharField(max_length=40, blank=True, null=True)
+    transport = models.CharField(max_length=40, blank=True, null=True,default="transport-udp")
     aors = models.CharField(max_length=200, blank=True, null=True)
     auth = models.CharField(max_length=40, blank=True, null=True)
-    context = models.CharField(max_length=40, blank=True, null=True)
-    disallow = models.CharField(max_length=200, blank=True, null=True)
-    allow = models.CharField(max_length=200, blank=True, null=True)
-    direct_media = models.CharField(max_length=3, blank=True, null=True)
+    context = models.CharField(max_length=40, blank=True, null=True,default="testing")
+    disallow = models.CharField(max_length=200, blank=True, null=True,default="all")
+    allow = models.CharField(max_length=200, blank=True, null=True,default="ulaw,alaw,g722,gsm,vp9,vp8,h264")
+    direct_media = models.CharField(max_length=3, blank=True, null=True,default="no")
     mailboxes = models.CharField(max_length=40, blank=True, null=True)
-    deny = models.CharField(max_length=95, blank=True, null=True)
-    permit = models.CharField(max_length=95, blank=True, null=True)
-    #endpoisnt ortakları end
-    #aours ortakları start
-    # id = models.CharField(unique=True, max_length=40)
-    max_contacts = models.IntegerField(blank=True, null=True)
-    qualify_frequency = models.IntegerField(blank=True, null=True)
-    #aours ortakları end
-    #PsAuths ortakları start
-    #id = models.CharField(unique=True, max_length=40)
-    auth_type = models.CharField(max_length=12, blank=True, null=True)
+    deny = models.CharField(max_length=95, blank=True, null=True,default="0.0.0.0/0")
+    permit = models.CharField(max_length=95, blank=True, null=True,default="0.0.0.0/0")
+    max_contacts = models.IntegerField(blank=True, null=True,default="1")
+    qualify_frequency = models.IntegerField(blank=True, null=True,default="30")
+    auth_type = models.CharField(max_length=12, blank=True, null=True,default="userpass")
     password = models.CharField(max_length=80, blank=True, null=True)
     username = models.CharField(max_length=40, blank=True, null=True)
     DahiliGrup = models.CharField(max_length=40, blank=True, null=True)
@@ -239,7 +227,6 @@ class PsjsipAdd(models.Model):
     ps_auths = models.ForeignKey(PsAuths, on_delete=models.CASCADE, blank=True, default='Değer',)
     
      
-    
     class Meta:
         # managed = False
         db_table = 'PsjsipAdd'
@@ -254,11 +241,11 @@ class PsjsipAdd(models.Model):
         # PsAors, PsAuths ve PsEndpoints modellerine de veri eklenmesini sağlayan kodlar
         ps_endpoints = PsEndpoints.objects.create( id = self.id,
                         transport =self.transport,
-                        aors =self.aors,
-                        auth = self.auth,
+                        aors = self.id,
+                        auth = self.id,
                         context = self.context,
                         disallow =self.disallow,
-                        allow =self. allow,
+                        allow =self.allow,
                         direct_media =self.direct_media, 
                         mailboxes =self.mailboxes,
                         deny = self.deny,
@@ -302,16 +289,17 @@ class PsContacts(models.Model):
     call_id = models.CharField(max_length=255, blank=True, null=True)
     endpoint = models.CharField(max_length=40, blank=True, null=True)
     prune_on_boot = models.CharField(max_length=3, blank=True, null=True)
+    
+    
 
     class Meta:
+        
         managed = False
         db_table = 'ps_contacts'
         verbose_name = 'ps_contacts'
         verbose_name_plural = 'ps_contacts'
         unique_together = (('id', 'reg_server'),)
-        
-        
-        
+             
 
 class PsEndpointIdIps(models.Model):
     id = models.CharField(primary_key=True,unique=True, max_length=40)
@@ -325,9 +313,7 @@ class PsEndpointIdIps(models.Model):
         db_table = 'ps_endpoint_id_ips'
         verbose_name = 'PsEndpointIdIps'
         verbose_name_plural = 'PsEndpointIdIps'
-        
-        
-
+            
 class PsDomainAliases(models.Model):
     id = models.CharField(primary_key=True,unique=True, max_length=40)
     domain = models.CharField(max_length=80, blank=True, null=True)
@@ -338,3 +324,70 @@ class PsDomainAliases(models.Model):
         verbose_name = 'PsDomainAliases'
         verbose_name_plural = 'PsDomainAliases'
 
+
+
+
+class CustemCdrTables(models.Model):
+    Event = models.CharField(max_length=80, blank=True, null=True)
+    Privilege = models.CharField(max_length=80, blank=True, null=True)
+    SequenceNumber = models.CharField(max_length=80, blank=True, null=True)
+    File  = models.CharField(max_length=80, blank=True, null=True)
+    Line = models.CharField(max_length=80, blank=True, null=True)
+    Func = models.CharField(max_length=80, blank=True, null=True)
+    AccountCode = models.CharField(max_length=80, blank=True, null=True)
+    Source   = models.CharField(max_length=80, blank=True, null=True)
+    Destination  = models.CharField(max_length=80, blank=True, null=True)
+    DestinationContext= models.CharField(max_length=80, blank=True, null=True) 
+    CallerID = models.CharField(max_length=80, blank=True, null=True)
+    Channel = models.CharField(max_length=80, blank=True, null=True)
+    DestinationChannel  = models.CharField(max_length=80, blank=True, null=True)
+    LastApplication = models.CharField(max_length=80, blank=True, null=True)
+    LastData = models.CharField(max_length=80, blank=True, null=True)
+    StartTime = models.CharField(max_length=80, blank=True, null=True)
+    AnswerTime = models.CharField(max_length=80, blank=True, null=True)
+    EndTime  = models.CharField(max_length=80, blank=True, null=True)
+    Duration = models.IntegerField(blank=True, null=True)
+    BillableSeconds = models.IntegerField(blank=True, null=True)
+    Disposition = models.CharField(max_length=80, blank=True, null=True)
+    AMAFlags = models.CharField(max_length=80, blank=True, null=True)
+    UniqueID = models.CharField(max_length=80, blank=True, null=True)
+    UserField = models.CharField(max_length=80, blank=True, null=True)
+    Rate = models.CharField(max_length=80, blank=True, null=True)
+    Carrier = models.CharField(max_length=80, blank=True, null=True)
+    Calltype = models.CharField(max_length=80, blank=True, null=True)
+    Companyid = models.CharField(max_length=80, blank=True, null=True)
+    Specialid = models.CharField(max_length=80, blank=True, null=True)
+    Recordid = models.CharField(max_length=80, blank=True, null=True)
+    Likid = models.CharField(max_length=80, blank=True, null=True)
+    
+    class Meta:
+        # managed = False
+        db_table = 'CustemCdrTables'
+        verbose_name = 'CustemCdr_Tables'
+        verbose_name_plural = 'CustemCdr_Tables'
+
+#old
+class CdrTables(models.Model):
+    clid = models.CharField(max_length=80, blank=True, null=True)
+    src = models.CharField(max_length=80, blank=True, null=True)
+    dst = models.CharField(max_length=80, blank=True, null=True)
+    dcontext = models.CharField(max_length=80, blank=True, null=True)
+    channel = models.CharField(max_length=80, blank=True, null=True)
+    dstchannel = models.CharField(max_length=80, blank=True, null=True)
+    lastapp = models.CharField(max_length=80, blank=True, null=True)
+    lastdata = models.CharField(max_length=80, blank=True, null=True)
+    duration = models.IntegerField( blank=True, null=True)
+    billsec = models.IntegerField(blank=True, null=True)
+    disposition = models.CharField(max_length=45, blank=True, null=True)
+    amaflags = models.IntegerField( blank=True, null=True)
+    accountcode = models.CharField(max_length=20, blank=True, null=True)
+    uniqueid = models.CharField(max_length=150, blank=True, null=True)
+    userfield = models.CharField(max_length=255, blank=True, null=True)
+    
+    class Meta:
+        # managed = False
+        db_table = 'CdrTables'
+        verbose_name = 'Cdr_Tables'
+        verbose_name_plural = 'Cdr_Tables'
+    
+    
