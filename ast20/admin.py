@@ -1,8 +1,8 @@
 from django.contrib import admin
 from .models import(PsAors,PsAuths,PsEndpoints,PsContacts,PsEndpointIdIps,
-                    PsDomainAliases,PsjsipAdd,CustemCdrTables)
+                    PsDomainAliases,PsjsipAdd,CustemCdrTables,cdr)
 from .forms import (PsAorsForm,PsAuthsForm,PsEndpointsForm,PsContactsForm,
-                    PsEndpointIdIpsForm,PsDomainAliasesForm,PsjsipAddForm)
+                    PsEndpointIdIpsForm,PsDomainAliasesForm,PsjsipAddForm,cdr)
 
 
 @admin.register(PsjsipAdd,)
@@ -311,8 +311,37 @@ class CustemCdrTablesAdmin(admin.ModelAdmin):
     
     
 
+@admin.register(cdr,)
+class cdr(admin.ModelAdmin):
+    search_fields = ('src','dst')
+    list_display =(
+        'calldate', 
+        'clid' ,
+        'src', 
+        'dst',
+        'dcontext', 
+        'channel', 
+        'dstchannel',
+        'lastapp', 
+        'lastdata', 
+        'duration', 
+        'billsec', 
+        'disposition',
+        'amaflags', 
+        'accountcode', 
+        'uniqueid', 
+        'userfield', 
+       
+       
+        'linkedid',
+        )
+    
+    
+ 
+    
+    
 
-
+ 
 
 
 

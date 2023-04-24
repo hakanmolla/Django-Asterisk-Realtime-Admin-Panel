@@ -326,7 +326,6 @@ class PsDomainAliases(models.Model):
 
 
 
-
 class CustemCdrTables(models.Model):
     Event = models.CharField(max_length=80, blank=True, null=True)
     Privilege = models.CharField(max_length=80, blank=True, null=True)
@@ -391,3 +390,42 @@ class CdrTables(models.Model):
         verbose_name_plural = 'Cdr_Tables'
     
     
+class cdr(models.Model):
+    calldate = models.DateTimeField(blank=True, null=True)
+    clid = models.CharField(max_length=80, blank=True, null=True)
+    src = models.CharField(max_length=80, blank=True, null=True)
+    dst = models.CharField(max_length=80, blank=True, null=True)
+    dcontext = models.CharField(max_length=80, blank=True, null=True)
+    channel = models.CharField(max_length=80, blank=True, null=True)
+    dstchannel = models.CharField(max_length=80, blank=True, null=True)
+    lastapp = models.CharField(max_length=80, blank=True, null=True)
+    lastdata = models.CharField(max_length=80, blank=True, null=True)
+    duration = models.IntegerField( blank=True, null=True)
+    billsec = models.IntegerField(blank=True, null=True)
+    disposition = models.CharField(max_length=45, blank=True, null=True)
+    amaflags = models.IntegerField( blank=True, null=True)
+    accountcode = models.CharField(max_length=30, blank=True, null=True)
+    uniqueid = models.CharField(max_length=150, blank=True, null=True)
+    userfield = models.CharField(max_length=255, blank=True, null=True)
+    peeraccount = models.CharField(max_length=255, blank=True, null=True)
+    linkedid = models.CharField(max_length=255, blank=True, null=True)
+    sequence = models.CharField(max_length=255, blank=True, null=True)
+    # usegmtime = models.CharField(max_length=255, blank=True, null=True)
+    # hrtime = models.CharField(max_length=255, blank=True, null=True)
+    # loguniqueid = models.CharField(max_length=255, blank=True, null=True)
+    # linkedid = models.CharField(max_length=255, blank=True, null=True)
+    # calltype = models.CharField(max_length=255, blank=True, null=True)
+    # callresult = models.CharField(max_length=255, blank=True, null=True)
+    # callcost = models.CharField(max_length=255, blank=True, null=True)
+    # callsource = models.CharField(max_length=255, blank=True, null=True)
+    # calldestination = models.CharField(max_length=255, blank=True, null=True)
+    # callprotocol = models.CharField(max_length=255, blank=True, null=True)
+    # callquality = models.CharField(max_length=255, blank=True, null=True)
+    # callrecording = models.CharField(max_length=255, blank=True, null=True)
+    # callnote = models.CharField(max_length=255, blank=True, null=True)
+    
+    class Meta:
+        # managed = False
+        db_table = 'cdr'
+        verbose_name = 'Cdr_Tables'
+        verbose_name_plural = 'Cdr_Tables'

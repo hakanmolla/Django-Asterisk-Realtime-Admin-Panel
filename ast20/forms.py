@@ -1,5 +1,5 @@
 from django import forms
-from .models import (PsAors,PsAuths,PsEndpoints,PsContacts,
+from .models import (PsAors,PsAuths,PsEndpoints,PsContacts,cdr,
                      PsEndpointIdIps,PsDomainAliases,PsjsipAdd,)
 
 class PsAorsForm(forms.ModelForm):
