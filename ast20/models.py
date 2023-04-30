@@ -516,8 +516,6 @@ class Queues(models.Model):
 
 
 
-# insert into queue_members (queue_name, interface, membername, penalty, wrapuptime) values 
-#                           ('Q500', 'Local/101@testing/n', '101', '0', '5'); 
         
 class QueueMembers(models.Model):
     QUEUE_CHOICES = [(q.name, q.name) for q in Queues.objects.all()]
@@ -576,4 +574,103 @@ class QueueLog(models.Model):
         managed = False
         db_table = 'queue_log'
         
+
+
+
+
+class Voicemail(models.Model):
+    uniqueid = models.AutoField(primary_key=True)
+    context = models.CharField(max_length=80)
+    mailbox = models.CharField(max_length=80)
+    password = models.CharField(max_length=80)
+    fullname = models.CharField(max_length=80, blank=True, null=True)
+    alias = models.CharField(max_length=80, blank=True, null=True)
+    email = models.CharField(max_length=80, blank=True, null=True)
+    pager = models.CharField(max_length=80, blank=True, null=True)
+    attach = models.CharField(max_length=3, blank=True, null=True)
+    attachfmt = models.CharField(max_length=10, blank=True, null=True)
+    serveremail = models.CharField(max_length=80, blank=True, null=True)
+    language = models.CharField(max_length=20, blank=True, null=True)
+    tz = models.CharField(max_length=30, blank=True, null=True)
+    deletevoicemail = models.CharField(max_length=3, blank=True, null=True)
+    saycid = models.CharField(max_length=3, blank=True, null=True)
+    sendvoicemail = models.CharField(max_length=3, blank=True, null=True)
+    review = models.CharField(max_length=3, blank=True, null=True)
+    tempgreetwarn = models.CharField(max_length=3, blank=True, null=True)
+    operator = models.CharField(max_length=3, blank=True, null=True)
+    envelope = models.CharField(max_length=3, blank=True, null=True)
+    sayduration = models.IntegerField(blank=True, null=True)
+    forcename = models.CharField(max_length=3, blank=True, null=True)
+    forcegreetings = models.CharField(max_length=3, blank=True, null=True)
+    callback = models.CharField(max_length=80, blank=True, null=True)
+    dialout = models.CharField(max_length=80, blank=True, null=True)
+    exitcontext = models.CharField(max_length=80, blank=True, null=True)
+    maxmsg = models.IntegerField(blank=True, null=True)
+    volgain = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    imapuser = models.CharField(max_length=80, blank=True, null=True)
+    imappassword = models.CharField(max_length=80, blank=True, null=True)
+    imapserver = models.CharField(max_length=80, blank=True, null=True)
+    imapport = models.CharField(max_length=8, blank=True, null=True)
+    imapflags = models.CharField(max_length=80, blank=True, null=True)
+    stamp = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'voicemail'
         
+        
+        
+        
+class Musiconhold(models.Model):
+    name = models.CharField(primary_key=True, max_length=80)
+    mode = models.CharField(max_length=10, blank=True, null=True)
+    directory = models.CharField(max_length=255, blank=True, null=True)
+    application = models.CharField(max_length=255, blank=True, null=True)
+    digit = models.CharField(max_length=1, blank=True, null=True)
+    sort = models.CharField(max_length=10, blank=True, null=True)
+    format = models.CharField(max_length=10, blank=True, null=True)
+    stamp = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'musiconhold'
+
+
+class MusiconholdEntry(models.Model):
+    name = models.OneToOneField(Musiconhold, models.DO_NOTHING, db_column='name', primary_key=True)  # The composite primary key (name, position) found, that is not supported. The first column is selected.
+    position = models.IntegerField()
+    entry = models.CharField(max_length=1024)
+
+    class Meta:
+        managed = False
+        db_table = 'musiconhold_entry'
+        unique_together = (('name', 'position'),)
+        
+        
+        
+        
+class CEL(models.Model):
+    id = models.AutoField(primary_key=True)
+    eventtype = models.CharField(max_length=20)
+    eventtime = models.DateTimeField()
+    cid_name = models.CharField(max_length=80)
+    cid_num = models.CharField(max_length=80)
+    cid_ani = models.CharField(max_length=80)
+    cid_rdnis = models.CharField(max_length=80)
+    cid_dnid = models.CharField(max_length=80)
+    exten = models.CharField(max_length=80)
+    context = models.CharField(max_length=80)
+    channame = models.CharField(max_length=80)
+    appname = models.CharField(max_length=80)
+    appdata = models.CharField(max_length=80)
+    amaflags = models.IntegerField()
+    accountcode = models.CharField(max_length=80)
+    uniqueid = models.CharField(max_length=80)
+    linkedid = models.CharField(max_length=80)
+    peer = models.CharField(max_length=80)
+    userdeftype = models.CharField(max_length=80)
+    userfield = models.CharField(max_length=80)
+
+    class Meta:
+        managed = False
+        db_table = 'cel'

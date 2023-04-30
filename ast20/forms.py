@@ -1,6 +1,6 @@
 from django import forms
-from .models import (PsAors,PsAuths,PsEndpoints,PsContacts,cdr,
-                     PsEndpointIdIps,PsDomainAliases,PsjsipAdd,Queues,QueueMembers)
+from .models import (PsAors,PsAuths,PsEndpoints,PsContacts,cdr,CEL,
+                     PsEndpointIdIps,PsDomainAliases,PsjsipAdd,Queues,QueueMembers,Voicemail,Musiconhold)
 
 class PsAorsForm(forms.ModelForm):
     class Meta:
@@ -270,6 +270,88 @@ class QueuesMembersForm(forms.ModelForm):
         
         
         
-   
+class VoicemailForm(forms.ModelForm):
+    class Meta:
+        exclude = ('uniqueid',)
+        model =  Voicemail
+        fields= ('uniqueid',
+                'context',
+                'mailbox',
+                'password',
+                'fullname', 
+                'alias', 
+                'email', 
+                'pager', 
+                'attach',
+                'attachfmt', 
+                'serveremail', 
+                'language', 
+                'tz', 
+                'deletevoicemail',
+                'saycid', 
+                'sendvoicemail', 
+                'review', 
+                'tempgreetwarn', 
+                'operator',
+                'envelope', 
+                'sayduration', 
+                'forcename', 
+                'forcegreetings', 
+                'callback', 
+                'dialout',
+                'exitcontext', 
+                'maxmsg', 
+                'volgain', 
+                'imapuser', 
+                'imappassword', 
+                'imapserver',
+                'imapport',
+                'imapflags', 
+                'stamp',  ) 
+        
+        
+        
 
 
+
+
+class MusiconholdForm(forms.ModelForm):
+    class Meta:
+        exclude = ('uniqueid',)
+        model =  Musiconhold
+        fields= ('name', 
+                    'mode', 
+                    'directory', 
+                    'application',
+                    'digit',
+                    'sort', 
+                    'format', 
+                    'stamp', ) 
+        
+        
+
+class CELForm(forms.ModelForm):
+    class Meta:
+        model =  CEL
+        fields= ( 'id', 
+                    'eventtype', 
+                    'eventtime', 
+                    'cid_name', 
+                    'cid_num', 
+                    'cid_ani', 
+                    'cid_rdnis', 
+                    'cid_dnid', 
+                    'exten', 
+                    'context', 
+                    'channame', 
+                    'appname', 
+                    'appdata', 
+                    'amaflags', 
+                    'accountcode', 
+                    'uniqueid', 
+                    'linkedid', 
+                    'peer', 
+                    'userdeftype', 
+                    'userfield', ) 
+
+ 

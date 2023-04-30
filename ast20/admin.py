@@ -1,10 +1,10 @@
 from django.contrib import admin
 from .models import(PsAors,PsAuths,PsEndpoints,PsContacts,PsEndpointIdIps,
                     PsDomainAliases,PsjsipAdd,CustemCdrTables,cdr,Queues,QueueMembers,
-                    QueueLog)
+                    QueueLog,Voicemail,Musiconhold,MusiconholdEntry,CEL)
 from .forms import (PsAorsForm,PsAuthsForm,PsEndpointsForm,PsContactsForm,
                     PsEndpointIdIpsForm,PsDomainAliasesForm,PsjsipAddForm,cdr,
-                    QueuesForm,QueuesMembersForm)
+                    QueuesForm,QueuesMembersForm,VoicemailForm,MusiconholdForm,CELForm)
 
 
 @admin.register(PsjsipAdd,)
@@ -385,8 +385,100 @@ class QueueLogAdmin(admin.ModelAdmin):
 
 
 
+    
+@admin.register(Voicemail,)
+class QueueMembersAdmin(admin.ModelAdmin):
+    form = VoicemailForm
+    search_fields = ('mailbox',)
+    list_display =('uniqueid',
+    'context',
+    'mailbox',
+    'password',
+    'fullname', 
+    'alias', 
+    'email', 
+    'pager', 
+    'attach',
+    'attachfmt', 
+    'serveremail', 
+    'language', 
+    'tz', 
+    'deletevoicemail',
+    'saycid', 
+    'sendvoicemail', 
+    'review', 
+    'tempgreetwarn', 
+    'operator',
+    'envelope', 
+    'sayduration', 
+    'forcename', 
+    'forcegreetings', 
+    'callback', 
+    'dialout',
+    'exitcontext', 
+    'maxmsg', 
+    'volgain', 
+    'imapuser', 
+    'imappassword', 
+    'imapserver',
+    'imapport',
+    'imapflags', 
+    'stamp',  )
+    
 
 
 
 
+    
+@admin.register(Musiconhold,)
+class MusiconholdAdmin(admin.ModelAdmin):
+    form = MusiconholdForm
+    search_fields = ('name',)
+    list_display =('name', 
+                    'mode', 
+                    'directory', 
+                    'application',
+                    'digit',
+                    'sort', 
+                    'format', 
+                    'stamp', )
+    
 
+
+
+@admin.register(MusiconholdEntry,)
+class MusiconholdEntryAdmin(admin.ModelAdmin):
+    search_fields = ('name',)
+    list_display =( 'name', 
+                    'position',
+                    'entry',
+                    )
+    
+    
+
+
+
+@admin.register(CEL,)
+class CelAdmin(admin.ModelAdmin):
+    search_fields = ('linkedid',)
+    list_display =( 'id', 
+                    'eventtype', 
+                    'eventtime', 
+                    'cid_name', 
+                    'cid_num', 
+                    'cid_ani', 
+                    'cid_rdnis', 
+                    'cid_dnid', 
+                    'exten', 
+                    'context', 
+                    'channame', 
+                    'appname', 
+                    'appdata', 
+                    'amaflags', 
+                    'accountcode', 
+                    'uniqueid', 
+                    'linkedid', 
+                    'peer', 
+                    'userdeftype', 
+                    'userfield', 
+                    )
