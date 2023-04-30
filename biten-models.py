@@ -210,9 +210,101 @@ class PsEndpointIdIps(models.Model):
 
 
 class PsDomainAliases(models.Model):
+    
+    
+    
+    
+
     id = models.CharField(unique=True, max_length=40)
     domain = models.CharField(max_length=80, blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'ps_domain_aliases'
+        
+        
+        
+
+
+
+
+class Queues(models.Model):
+    name = models.CharField(primary_key=True, max_length=128)
+    musiconhold = models.CharField(max_length=128, blank=True, null=True)
+    announce = models.CharField(max_length=128, blank=True, null=True)
+    context = models.CharField(max_length=128, blank=True, null=True)
+    timeout = models.IntegerField(blank=True, null=True)
+    ringinuse = models.CharField(max_length=3, blank=True, null=True)
+    setinterfacevar = models.CharField(max_length=3, blank=True, null=True)
+    setqueuevar = models.CharField(max_length=3, blank=True, null=True)
+    setqueueentryvar = models.CharField(max_length=3, blank=True, null=True)
+    monitor_format = models.CharField(max_length=8, blank=True, null=True)
+    membermacro = models.CharField(max_length=512, blank=True, null=True)
+    membergosub = models.CharField(max_length=512, blank=True, null=True)
+    queue_youarenext = models.CharField(max_length=128, blank=True, null=True)
+    queue_thereare = models.CharField(max_length=128, blank=True, null=True)
+    queue_callswaiting = models.CharField(max_length=128, blank=True, null=True)
+    queue_quantity1 = models.CharField(max_length=128, blank=True, null=True)
+    queue_quantity2 = models.CharField(max_length=128, blank=True, null=True)
+    queue_holdtime = models.CharField(max_length=128, blank=True, null=True)
+    queue_minutes = models.CharField(max_length=128, blank=True, null=True)
+    queue_minute = models.CharField(max_length=128, blank=True, null=True)
+    queue_seconds = models.CharField(max_length=128, blank=True, null=True)
+    queue_thankyou = models.CharField(max_length=128, blank=True, null=True)
+    queue_callerannounce = models.CharField(max_length=128, blank=True, null=True)
+    queue_reporthold = models.CharField(max_length=128, blank=True, null=True)
+    announce_frequency = models.IntegerField(blank=True, null=True)
+    announce_to_first_user = models.CharField(max_length=3, blank=True, null=True)
+    min_announce_frequency = models.IntegerField(blank=True, null=True)
+    announce_round_seconds = models.IntegerField(blank=True, null=True)
+    announce_holdtime = models.CharField(max_length=128, blank=True, null=True)
+    announce_position = models.CharField(max_length=128, blank=True, null=True)
+    announce_position_limit = models.IntegerField(blank=True, null=True)
+    periodic_announce = models.CharField(max_length=50, blank=True, null=True)
+    periodic_announce_frequency = models.IntegerField(blank=True, null=True)
+    relative_periodic_announce = models.CharField(max_length=3, blank=True, null=True)
+    random_periodic_announce = models.CharField(max_length=3, blank=True, null=True)
+    retry = models.IntegerField(blank=True, null=True)
+    wrapuptime = models.IntegerField(blank=True, null=True)
+    penaltymemberslimit = models.IntegerField(blank=True, null=True)
+    autofill = models.CharField(max_length=3, blank=True, null=True)
+    monitor_type = models.CharField(max_length=128, blank=True, null=True)
+    autopause = models.CharField(max_length=3, blank=True, null=True)
+    autopausedelay = models.IntegerField(blank=True, null=True)
+    autopausebusy = models.CharField(max_length=3, blank=True, null=True)
+    autopauseunavail = models.CharField(max_length=3, blank=True, null=True)
+    maxlen = models.IntegerField(blank=True, null=True)
+    servicelevel = models.IntegerField(blank=True, null=True)
+    strategy = models.CharField(max_length=11, blank=True, null=True)
+    joinempty = models.CharField(max_length=128, blank=True, null=True)
+    leavewhenempty = models.CharField(max_length=128, blank=True, null=True)
+    reportholdtime = models.CharField(max_length=3, blank=True, null=True)
+    memberdelay = models.IntegerField(blank=True, null=True)
+    weight = models.IntegerField(blank=True, null=True)
+    timeoutrestart = models.CharField(max_length=3, blank=True, null=True)
+    defaultrule = models.CharField(max_length=128, blank=True, null=True)
+    timeoutpriority = models.CharField(max_length=128, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'queues'
+
+
+
+
+
+class QueueMembers(models.Model):
+    queue_name = models.CharField(primary_key=True, max_length=80)  # The composite primary key (queue_name, interface) found, that is not supported. The first column is selected.
+    interface = models.CharField(max_length=80)
+    membername = models.CharField(max_length=80, blank=True, null=True)
+    state_interface = models.CharField(max_length=80, blank=True, null=True)
+    penalty = models.IntegerField(blank=True, null=True)
+    paused = models.IntegerField(blank=True, null=True)
+    uniqueid = models.AutoField(unique=True)
+    wrapuptime = models.IntegerField(blank=True, null=True)
+    ringinuse = models.CharField(max_length=5, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'queue_members'
+        unique_together = (('queue_name', 'interface'),)

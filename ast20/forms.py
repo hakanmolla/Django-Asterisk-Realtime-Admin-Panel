@@ -1,6 +1,6 @@
 from django import forms
 from .models import (PsAors,PsAuths,PsEndpoints,PsContacts,cdr,
-                     PsEndpointIdIps,PsDomainAliases,PsjsipAdd,)
+                     PsEndpointIdIps,PsDomainAliases,PsjsipAdd,Queues,QueueMembers)
 
 class PsAorsForm(forms.ModelForm):
     class Meta:
@@ -223,9 +223,6 @@ class PsjsipAddForm(forms.ModelForm):
         return instance
         
         
-    
-          
-
 
 class PsEndpointIdIpsForm(forms.ModelForm):
     class Meta:
@@ -244,4 +241,35 @@ class PsDomainAliasesForm(forms.ModelForm):
         model =  PsDomainAliases
         fields= ('id', 'domain',)
         
+
+class QueuesForm(forms.ModelForm):
+    class Meta:
+        model =  Queues
+        fields= ('name',     
+                'musiconhold',     
+                'timeout',    
+                'ringinuse',     
+                'queue_holdtime',     
+                'retry',     
+                'wrapuptime',   
+                'strategy',   )   
         
+        
+
+class QueuesMembersForm(forms.ModelForm):
+    class Meta:
+        exclude = ('uniqueid',)
+        model =  QueueMembers
+        fields= (  'queue_name',  
+    'membername', 
+    'state_interface', 
+    'penalty',
+    'paused',
+    'wrapuptime',
+    'ringinuse',   ) 
+        
+        
+        
+   
+
+

@@ -1,8 +1,10 @@
 from django.contrib import admin
 from .models import(PsAors,PsAuths,PsEndpoints,PsContacts,PsEndpointIdIps,
-                    PsDomainAliases,PsjsipAdd,CustemCdrTables,cdr)
+                    PsDomainAliases,PsjsipAdd,CustemCdrTables,cdr,Queues,QueueMembers,
+                    QueueLog)
 from .forms import (PsAorsForm,PsAuthsForm,PsEndpointsForm,PsContactsForm,
-                    PsEndpointIdIpsForm,PsDomainAliasesForm,PsjsipAddForm,cdr)
+                    PsEndpointIdIpsForm,PsDomainAliasesForm,PsjsipAddForm,cdr,
+                    QueuesForm,QueuesMembersForm)
 
 
 @admin.register(PsjsipAdd,)
@@ -39,10 +41,6 @@ class PsjsipAddAdmin(admin.ModelAdmin):
          ps_auths.delete()
 
 
-
-
-
-
 @admin.register(PsAors,)
 class PsAorsAdmin(admin.ModelAdmin):
     form = PsAorsForm
@@ -63,7 +61,6 @@ class PsAorsAdmin(admin.ModelAdmin):
                     'voicemail_extension', 
                     'remove_unavailable',)
    
-  
 
 @admin.register(PsAuths)
 class PsAuthsAdmin(admin.ModelAdmin):
@@ -331,13 +328,56 @@ class cdr(admin.ModelAdmin):
         'accountcode', 
         'uniqueid', 
         'userfield', 
-       
-       
         'linkedid',
         )
     
     
  
+@admin.register(Queues,)
+class QueuesAdmin(admin.ModelAdmin):
+    form = QueuesForm
+    search_fields = ('name',)
+    list_display =('name',     
+                'musiconhold',     
+                'timeout',    
+                'ringinuse',     
+                'queue_holdtime',     
+                'retry',     
+                'wrapuptime',   
+                'strategy', )
+    
+  
+    
+@admin.register(QueueMembers,)
+class QueueMembersAdmin(admin.ModelAdmin):
+    form = QueuesMembersForm
+    search_fields = ('queue_name',)
+    list_display =('queue_name', 
+    'interface', 
+    'membername', 
+    'state_interface', 
+    'penalty',
+    'paused',
+    'wrapuptime',
+    'ringinuse',  )
+    
+    
+  
+        
+
+@admin.register(QueueLog,)
+class QueueLogAdmin(admin.ModelAdmin):
+    search_fields = ('time','queuename')
+    list_display =( 'time', 
+                    'data5',
+                    'data4',
+                    'data3', 
+                    'data2',
+                    'data1', 
+                    'event',
+                    'agent',
+                    'queuename',
+                    'callid',)
     
     
 

@@ -1,4 +1,10 @@
 from django.db import models
+from django.db.models.signals import post_save
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
+
+
+
  
 class PsAuths(models.Model):
     id = models.CharField(primary_key=True,unique=True, max_length=40)
@@ -50,7 +56,6 @@ class PsAors(models.Model):
         verbose_name = 'ps_aors'
         verbose_name_plural = 'ps_aors'
             
-
 class PsEndpoints(models.Model):
     id = models.CharField(primary_key=True,unique=True, max_length=40)
     transport = models.CharField(max_length=40, blank=True, null=True,default="transport-udp")
@@ -201,8 +206,7 @@ class PsEndpoints(models.Model):
         verbose_name_plural = 'PsEndpoints'
        # managed = False
         db_table = 'ps_endpoints'
-                      
-        
+                             
 class PsjsipAdd(models.Model):
     id = models.CharField(primary_key=True,unique=True, max_length=40)
     transport = models.CharField(max_length=40, blank=True, null=True,default="transport-udp")
@@ -324,8 +328,6 @@ class PsDomainAliases(models.Model):
         verbose_name = 'PsDomainAliases'
         verbose_name_plural = 'PsDomainAliases'
 
-
-
 class CustemCdrTables(models.Model):
     Event = models.CharField(max_length=80, blank=True, null=True)
     Privilege = models.CharField(max_length=80, blank=True, null=True)
@@ -429,3 +431,149 @@ class cdr(models.Model):
         db_table = 'cdr'
         verbose_name = 'Cdr_Tables'
         verbose_name_plural = 'Cdr_Tables'
+
+
+class Queues(models.Model):
+
+    Ast_strategy = [
+        
+        ('ringall', 'Ring All'),
+        ('leastrecent', 'Least Recent'),
+        ('fewestcalls', 'Fewest Calls'),
+        ('random', 'Random'),
+        ('roundrobin', 'roundrobin'),
+        ('rrmemory', 'Round Robin Memory'),
+        ('linear', 'Linear'),
+        ('wrandom', 'Weighted Random'),
+        ('rrordered', 'Round Robin Ordered')
+        
+    ]
+    yes_no={
+        ('yes', 'yes'),
+        ('no', 'no'),
+        
+    }
+    
+    name = models.CharField(primary_key=True, max_length=128)
+    musiconhold = models.CharField(max_length=128, blank=True, null=True,default="default")
+    announce = models.CharField(max_length=128, blank=True, null=True)
+    context = models.CharField(max_length=128, blank=True, null=True)
+    timeout = models.IntegerField(blank=True, null=True,default=15)
+    ringinuse = models.CharField(max_length=3, blank=True, null=True,default="no", choices=yes_no)
+    setinterfacevar = models.CharField(max_length=3, blank=True, null=True)
+    setqueuevar = models.CharField(max_length=3, blank=True, null=True)
+    setqueueentryvar = models.CharField(max_length=3, blank=True, null=True)
+    monitor_format = models.CharField(max_length=8, blank=True, null=True)
+    membermacro = models.CharField(max_length=512, blank=True, null=True)
+    membergosub = models.CharField(max_length=512, blank=True, null=True)
+    queue_youarenext = models.CharField(max_length=128, blank=True, null=True)
+    queue_thereare = models.CharField(max_length=128, blank=True, null=True)
+    queue_callswaiting = models.CharField(max_length=128, blank=True, null=True)
+    queue_quantity1 = models.CharField(max_length=128, blank=True, null=True)
+    queue_quantity2 = models.CharField(max_length=128, blank=True, null=True)
+    queue_holdtime = models.CharField(max_length=128, blank=True, null=True, choices=yes_no,default="yes",)
+    queue_minutes = models.CharField(max_length=128, blank=True, null=True)
+    queue_minute = models.CharField(max_length=128, blank=True, null=True)
+    queue_seconds = models.CharField(max_length=128, blank=True, null=True)
+    queue_thankyou = models.CharField(max_length=128, blank=True, null=True)
+    queue_callerannounce = models.CharField(max_length=128, blank=True, null=True)
+    queue_reporthold = models.CharField(max_length=128, blank=True, null=True)
+    announce_frequency = models.IntegerField(blank=True, null=True)
+    announce_to_first_user = models.CharField(max_length=3, blank=True, null=True)
+    min_announce_frequency = models.IntegerField(blank=True, null=True)
+    announce_round_seconds = models.IntegerField(blank=True, null=True)
+    announce_holdtime = models.CharField(max_length=128, blank=True, null=True)
+    announce_position = models.CharField(max_length=128, blank=True, null=True)
+    announce_position_limit = models.IntegerField(blank=True, null=True)
+    periodic_announce = models.CharField(max_length=50, blank=True, null=True)
+    periodic_announce_frequency = models.IntegerField(blank=True, null=True)
+    relative_periodic_announce = models.CharField(max_length=3, blank=True, null=True)
+    random_periodic_announce = models.CharField(max_length=3, blank=True, null=True)
+    retry = models.IntegerField(blank=True, null=True,default=5)
+    wrapuptime = models.IntegerField(blank=True, null=True,default=5)
+    penaltymemberslimit = models.IntegerField(blank=True, null=True)
+    autofill = models.CharField(max_length=3, blank=True, null=True)
+    monitor_type = models.CharField(max_length=128, blank=True, null=True)
+    autopause = models.CharField(max_length=3, blank=True, null=True)
+    autopausedelay = models.IntegerField(blank=True, null=True)
+    autopausebusy = models.CharField(max_length=3, blank=True, null=True)
+    autopauseunavail = models.CharField(max_length=3, blank=True, null=True)
+    maxlen = models.IntegerField(blank=True, null=True)
+    servicelevel = models.IntegerField(blank=True, null=True)
+    strategy = models.CharField(max_length=11, blank=True, null=True, choices=Ast_strategy)
+    joinempty = models.CharField(max_length=128, blank=True, null=True)
+    leavewhenempty = models.CharField(max_length=128, blank=True, null=True)
+    reportholdtime = models.CharField(max_length=3, blank=True, null=True)
+    memberdelay = models.IntegerField(blank=True, null=True)
+    weight = models.IntegerField(blank=True, null=True)
+    timeoutrestart = models.CharField(max_length=3, blank=True, null=True)
+    defaultrule = models.CharField(max_length=128, blank=True, null=True)
+    timeoutpriority = models.CharField(max_length=128, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'queues'
+
+
+
+# insert into queue_members (queue_name, interface, membername, penalty, wrapuptime) values 
+#                           ('Q500', 'Local/101@testing/n', '101', '0', '5'); 
+        
+class QueueMembers(models.Model):
+    QUEUE_CHOICES = [(q.name, q.name) for q in Queues.objects.all()]
+    PJSIP_CHOICES = [(q.id, q.id) for q in PsjsipAdd.objects.all()]
+    queue_name = models.CharField(choices=QUEUE_CHOICES,primary_key=True, max_length=80)  # The composite primary key (queue_name, interface) found, that is not supported. The first column is selected.
+    interface = models.CharField(max_length=80)
+    membername = models.CharField(choices=PJSIP_CHOICES,max_length=80, blank=True, null=True)
+    state_interface = models.CharField(max_length=80, blank=True, null=True)
+    penalty = models.IntegerField(blank=True, null=True)
+    paused = models.IntegerField(blank=True, null=True)
+    uniqueid = models.IntegerField(unique=True, null=True) 
+    wrapuptime = models.IntegerField(blank=True, null=True)
+    ringinuse = models.CharField(max_length=5, blank=True, null=True)
+    
+    
+    def save(self, *args, **kwargs):
+        self.interface = "PJSIP/" + str(self.membername)
+        super().save(*args, **kwargs)
+
+    class Meta:
+        managed = False
+        db_table = 'queue_members'
+        unique_together = (('queue_name', 'interface'),)
+
+
+
+@receiver(post_save, sender=Queues)
+def update_queue_choices(sender, **kwargs):
+    """
+    Updates the QUEUE_CHOICES field in QueueMembers model
+    """
+    QueueMembers.QUEUE_CHOICES = [(q.name, q.name) for q in Queues.objects.all()]
+    
+@receiver(post_delete, sender=Queues)
+def delete_queue_choices(sender, **kwargs):
+
+    global QUEUE_CHOICES
+    QUEUE_CHOICES = [(q.name, q.name) for q in Queues.objects.all()]
+    
+    
+    
+
+class QueueLog(models.Model):
+    time = models.DateTimeField(primary_key=True)
+    data5 = models.CharField(max_length=255, blank=True, null=True)
+    data4 = models.CharField(max_length=255, blank=True, null=True)
+    data3 = models.CharField(max_length=255, blank=True, null=True)
+    data2 = models.CharField(max_length=255, blank=True, null=True)
+    data1 = models.CharField(max_length=255, blank=True, null=True)
+    event = models.CharField(max_length=50)
+    agent = models.CharField(max_length=50, blank=True, null=True)
+    queuename = models.CharField(max_length=50)
+    callid = models.CharField(max_length=50, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'queue_log'
+        
+        

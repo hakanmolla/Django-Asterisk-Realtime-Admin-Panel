@@ -3,7 +3,27 @@ from ast20.models import PsAors,PsAuths,PsEndpoints
 
 # Create your models here.
 
+
+
+
+class QueueLog(models.Model):
+    time = models.CharField(max_length=40, blank=True, null=True)
+    callid = models.CharField(max_length=32, default='')
+    queuename = models.CharField(max_length=32, default='')
+    agent = models.CharField(max_length=32, default='')
+    event = models.CharField(max_length=32, default='')
+    data1 = models.CharField(max_length=255, default='')
+    data2 = models.CharField(max_length=255, default='')
+    data3 = models.CharField(max_length=255, default='')
+    data4 = models.CharField(max_length=255, default='')
+    data5 = models.CharField(max_length=255, default='')
+
+    class Meta:
+        db_table = 'queue_log2'
+
+
 class PsjsipAdd(models.Model):
+    
     # MyCustomModel modeline ait alanlar
     #endpoisnt ortakları start
     id = models.CharField(primary_key=True,unique=True, max_length=40)
