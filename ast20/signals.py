@@ -3,7 +3,6 @@ from django.dispatch import receiver
 from .models import PsContacts,PsjsipAdd
 
 
-print('******buladasın kardeim********')
 
 @receiver(post_save, sender=PsContacts)
 def my_model_post_save(sender, instance, **kwargs):
