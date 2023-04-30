@@ -17,6 +17,9 @@ Bu proje, Django admin paneli üzerinden Asterisk Realtime aracılığıyla aşa
 - queue_members
 
 
+**Asterisk Realtime Ayarlarının yapılması gerekiyor Kendi ayarlarınız doğrultusunda.**
+
+
 ## Projeyi Çalıştırmak İçin:
 
 1. Gerekli Python modüllerini yükleyin: `pip install -r requirements.txt`
