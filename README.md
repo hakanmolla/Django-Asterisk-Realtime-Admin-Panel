@@ -15,9 +15,7 @@ Bu proje, Django admin paneli üzerinden Asterisk Realtime aracılığıyla aşa
 - voicemail
 - queues
 - queue_members
-- sipusers
-- sippeers
-- extensions
+
 
 ## Projeyi Çalıştırmak İçin:
 
