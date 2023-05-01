@@ -47,7 +47,7 @@ class PsAors(models.Model):
     voicemail_extension = models.CharField(max_length=40, blank=True, null=True)
     remove_unavailable = models.CharField(max_length=5, blank=True, null=True)
     PsjsipAdd = models.CharField(max_length=255, blank=True, null=True) 
-    #PsjsipAdd = models.ForeignKey(PsjsipAdd, on_delete=models.CASCADE, related_name='PsAors',default='Değer',)
+    
     
 
     class Meta:
